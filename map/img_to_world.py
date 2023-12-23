@@ -75,12 +75,12 @@ def obstacle_link(left, right, up, down, model):
 
 def default_scenes(world):
     # light
-    light = ET.SubElement(world, "inlude")
+    light = ET.SubElement(world, "include")
     light_uri = ET.SubElement(light, "uri")
     light_uri.text = "model://sun"
 
     # ground plane
-    plane = ET.SubElement(world, "inlude")
+    plane = ET.SubElement(world, "include")
     plane_uri = ET.SubElement(plane, "uri")
     plane_uri.text = "model://ground_plane"
 
