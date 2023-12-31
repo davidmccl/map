@@ -57,12 +57,17 @@ def obstacle_link(left, right, up, down, model):
     # collision
     collision = ET.SubElement(link, "collision", name=wall_name+"_Collision")
     transform_tags(collision)
-    # intertial
-    intertial = ET.SubElement(link, "intertial", name=wall_name+"_Intertial")
-    mass = ET.SubElement(intertial, "mass", value="5")
-    origin = ET.SubElement(intertial, "origin", xyz="0 0 0", rpy="0 0 0")
-    inertia = ET.SubElement(intertial, "inertia", ixx="0.004", ixy="0.001", ixz="0",
-                                                  iyy="0.006", iyz="0", izz="0.007")
+    # inertial
+    inertial = ET.SubElement(link, "inertial")
+    ET.SubElement(inertial, "mass").text = "0.5"
+    ET.SubElement(inertial, "pose").text = "0 0.01 0 0 0 0"
+    inertia = ET.SubElement(inertial, "inertia")
+    ET.SubElement(inertia, "ixx").text = "0.004"
+    ET.SubElement(inertia, "ixy").text = "0.001"
+    ET.SubElement(inertia, "ixz").text = "0"
+    ET.SubElement(inertia, "iyy").text = "0.006"
+    ET.SubElement(inertia, "iyz").text = "0"
+    ET.SubElement(inertia, "izz").text = "0.007"
     # visualization
     visual = ET.SubElement(link, "visual", name=wall_name+"_Visual")
     transform_tags(visual)
