@@ -138,8 +138,8 @@ if __name__ == "__main__":
     parser.add_argument("--name", type=str, help="path to the input file", required=True)
     parser.add_argument("--type", type=str, help="input file type", default="jpg", required=False)
     parser.add_argument("--size", type=int, help="image scale", default=75, required=False)
-    parser.add_argument("--scale", type=float, help="cell scale", default=0.01, required=False)
-    parser.add_argument("--height", type=float, help="wall height", default=0.05, required=False)
+    parser.add_argument("--scale", type=float, help="cell scale", default=0.1, required=False)
+    parser.add_argument("--height", type=float, help="wall height", default=0.5, required=False)
 
     args = parser.parse_args()
 
