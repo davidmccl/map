@@ -21,8 +21,6 @@ def find_obstacles(file_name, file_type):
         has_wall = False
         for x in range(width):
             pixel_value = img.getpixel((x, y))
-            if pixel_value > BLACK and pixel_value < WHITE:
-                print("pixel ({},{}) value {}".format(x, y, pixel_value))
             # New Obstacle
             if not has_wall and pixel_value <= BLACK:
                 has_wall = True
@@ -82,7 +80,7 @@ def obstacle_link(left, right, up, down, model):
     ET.SubElement(meta, "layer").text = "0"
     # position
     pose = ET.SubElement(link, "pose", frame='')
-    pose.text = "0 0 {} 0 -0 0".format(CELL_HEIGHT/2.0)
+    pose.text = "0 0 0 0 -0 0"
 
 def default_scenes(world):
     # light
@@ -137,11 +135,11 @@ def parse_jpg_to_world(file_name, obstacle_list):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", type=str, help="Path to the input file", required=True)
-    parser.add_argument("--type", type=str, help="Input file type", default=".jpg", required=False)
-    parser.add_argument("--size", type=int, help="Image scale", default=200, required=False)
-    parser.add_argument("--scale", type=float, help="Cell scale", default=0.1, required=False)
-    parser.add_argument("--height", type=float, help="Wall Height", default=1.0, required=False)
+    parser.add_argument("--name", type=str, help="path to the input file", required=True)
+    parser.add_argument("--type", type=str, help="input file type", default="jpg", required=False)
+    parser.add_argument("--size", type=int, help="image scale", default=75, required=False)
+    parser.add_argument("--scale", type=float, help="cell scale", default=0.01, required=False)
+    parser.add_argument("--height", type=float, help="wall height", default=0.05, required=False)
 
     args = parser.parse_args()
 
