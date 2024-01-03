@@ -1,8 +1,10 @@
 import xml.etree.ElementTree as ET
+import xml.dom.minidom
 import cv2, argparse
 from PIL import Image
 
 def img_pre_process(file_name, file_type, scale=200):
+    file_name = 'level' + file_name + '/level' + file_name
     origin_img = cv2.imread(file_name + '.' + file_type, cv2.IMREAD_GRAYSCALE)
     proc_img = cv2.resize(origin_img, (scale, scale), interpolation=cv2.INTER_NEAREST)
     proc_img = cv2.cvtColor(proc_img, cv2.COLOR_GRAY2BGR)
@@ -12,6 +14,7 @@ def img_pre_process(file_name, file_type, scale=200):
 def find_obstacles(file_name, file_type):
     obstacle_list = [] # pattern: [left, right, up, down]
 
+    file_name = 'level' + file_name + '/level' + file_name
     img = Image.open(file_name + "_proc." + file_type)
     img = img.convert("L")
 
@@ -129,9 +132,14 @@ def parse_jpg_to_world(file_name, obstacle_list):
 
     ET.SubElement(model, "static").text = "1"
 
-    # Create the SDF tree and write it to the file
-    sdf_tree = ET.ElementTree(sdf_root)
-    sdf_tree.write(file_name + ".world", encoding="UTF-8", xml_declaration=True)
+    # Convert the ElementTree to a string with indentation
+    xml_str = ET.tostring(sdf_root, encoding="unicode")
+    dom = xml.dom.minidom.parseString(xml_str)
+    pretty_xml_str = dom.toprettyxml()
+
+    # Write the formatted XML to a file
+    with open(f"level{file_name}/turtlebot3_level{file_name}.world", "w") as file:
+        file.write(pretty_xml_str)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
