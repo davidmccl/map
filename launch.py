@@ -12,7 +12,9 @@ def generate_launch_file(num_robots, level_range):
 
         # Create arguments for the robot model and position
         for robot_index in range(num_robots):
-            model_arg = ET.SubElement(root, "arg", name="model", default="$(env TURTLEBOT3_MODEL)")
+            model_arg = ET.SubElement(root, "arg", name="model",
+                                      default="$(env TURTLEBOT3_MODEL)", 
+                                      doc="model type [burger, waffle, waffle_pi]")
             x_pos_arg = ET.SubElement(root, "arg", name="x_pos")
             y_pos_arg = ET.SubElement(root, "arg", name="y_pos")
             ET.SubElement(root, "arg", name="z_pos", default="0.0")
