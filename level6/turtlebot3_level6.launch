@@ -1,13 +1,12 @@
 <?xml version="1.0" ?>
 <launch>
 	<arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
-	<arg name="x_pos" default="-2.4"/>
-	<arg name="y_pos" default="4.1"/>
+	<arg name="x_pos" default="-6.3"/>
+	<arg name="y_pos" default="2.7"/>
 	<arg name="z_pos" default="0.0"/>
 	<arg name="gravity" default="false"/>
-	<arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
-	<arg name="x_pos" default="-3.5"/>
-	<arg name="y_pos" default="4.7"/>
+	<arg name="x_pos" default="-4.3"/>
+	<arg name="y_pos" default="6.8"/>
 	<arg name="z_pos" default="0.0"/>
 	<arg name="gravity" default="false"/>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
