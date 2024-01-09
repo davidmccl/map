@@ -1,8 +1,6 @@
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
-import random
-
-MAP_SIZE = 7.5
+import random, argparse
 
 def generate_launch_file(num_robots, level_range):
     # Loop to generate launch configurations for each robot and level
@@ -20,7 +18,7 @@ def generate_launch_file(num_robots, level_range):
             x_pos_arg = ET.SubElement(root, "arg", name=f"{robot_name}_x_pos")
             y_pos_arg = ET.SubElement(root, "arg", name=f"{robot_name}_y_pos")
             ET.SubElement(root, "arg", name=f"{robot_name}_z_pos", default="0.0")
-            ET.SubElement(root, "arg", name=f"{robot_name}_gravity", default="false")
+            ET.SubElement(root, "arg", name=f"{robot_name}_grav ity", default="false")
 
             # Generate random values for x_pos and y_pos
             x_pos_value = round(random.uniform(0, -1 * MAP_SIZE), 1)
@@ -74,5 +72,15 @@ def generate_launch_file(num_robots, level_range):
             file.write(pretty_xml_str)
 
 if __name__ == "__main__":
-    # Example usage: generate a launch file for 2 robots, levels 4 to 6
-    generate_launch_file(num_robots=2, level_range=(3, 7))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--num", type=int, help="number of robots", default=2, required=True)
+    parser.add_argument("--low", type=int, help="lower bound of level", default=3, required=True)
+    parser.add_argument("--up", type=int, help="upper bound of level", default=6, required=True)
+    parser.add_argument("--size", type=int, help="map size", default=7, required=False)
+
+    args = parser.parse_args()
+
+    MAP_SIZE = args.size
+
+    generate_launch_file(num_robots=args.num, level_range=(args.low, args.up+1))
+

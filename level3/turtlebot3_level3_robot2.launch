@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
 <launch>
 	<arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
-	<arg name="robot0_x_pos" default="-3.8"/>
-	<arg name="robot0_y_pos" default="2.3"/>
+	<arg name="robot0_x_pos" default="-1.7"/>
+	<arg name="robot0_y_pos" default="7.3"/>
 	<arg name="robot0_z_pos" default="0.0"/>
-	<arg name="robot0_gravity" default="false"/>
-	<arg name="robot1_x_pos" default="-7.0"/>
-	<arg name="robot1_y_pos" default="6.9"/>
+	<arg name="robot0_grav ity" default="false"/>
+	<arg name="robot1_x_pos" default="-0.7"/>
+	<arg name="robot1_y_pos" default="9.0"/>
 	<arg name="robot1_z_pos" default="0.0"/>
-	<arg name="robot1_gravity" default="false"/>
+	<arg name="robot1_grav ity" default="false"/>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/turtlebot3_level3.world"/>
 		<arg name="paused" value="false"/>
