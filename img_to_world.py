@@ -96,6 +96,7 @@ def default_scenes(world):
     plane_uri = ET.SubElement(plane, "uri")
     plane_uri.text = "model://ground_plane"
 
+    # physics
     physics = ET.SubElement(world, "physics", type="ode")
     ET.SubElement(physics, "real_time_update_rate").text = "1000.0"
     ET.SubElement(physics, "max_step_size").text = "0.001"
@@ -114,6 +115,24 @@ def default_scenes(world):
     ET.SubElement(constraints, "erp").text = "0.2"
     ET.SubElement(constraints, "contact_max_correcting_vel").text = "2000.000000"
     ET.SubElement(constraints, "contact_surface_layer").text = "0.01000"
+
+    # gui
+    ET.SubElement(world, "plugin", filename="gz-sim-scene-broadcaster-system",
+                  name="gz::sim::systems::SceneBroadcaster")
+    gui = ET.SubElement(world, "gui", fullscreen="0")
+    plugin = ET.SubElement(gui, "plugin", filename="GridConfig", name="Grid")
+    gz_gui = ET.SubElement(plugin, "gz-gui")
+    ET.SubElement(gz_gui, "title").text = "Grid"
+    # insert = ET.SubElement(plugin, "insert")
+    # ET.SubElement(insert, "horizontal_cell_count").text = "200"
+    # ET.SubElement(insert, "vertical_cell_count").text = "0"
+    # ET.SubElement(insert, "cell_length").text = "0.2"
+    # ET.SubElement(insert, "pose").text = "-75 75 0  0 0 0"
+    # ET.SubElement(insert, "color").text = "1 1 1 0.7"
+    ET.SubElement(gz_gui, "cell_count").text = "200"
+    ET.SubElement(gz_gui, "cell_size").text = "0.2"
+    ET.SubElement(gz_gui, "pose").text = "-75 75 0  0 0 0"
+    ET.SubElement(gz_gui, "color").text = "1 1 1 0.7"
 
 def parse_jpg_to_world(file_name, obstacle_list):
     # Create the root element for the SDF file
@@ -145,7 +164,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", type=str, help="path to the input file", required=True)
     parser.add_argument("--type", type=str, help="input file type", default="jpg", required=False)
-    parser.add_argument("--size", type=int, help="image scale", default=75, required=False)
+    parser.add_argument("--size", type=int, help="image scale", default=75, required=False) # level 3 = 150, others = 75
     parser.add_argument("--scale", type=float, help="cell scale", default=0.1, required=False)
     parser.add_argument("--height", type=float, help="wall height", default=0.5, required=False)
 

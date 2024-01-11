@@ -27,6 +27,18 @@
 				</constraints>
 			</ode>
 		</physics>
+		<plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+		<gui fullscreen="0">
+			<plugin filename="GridConfig" name="Grid">
+				<gz-gui>
+					<title>Grid</title>
+					<cell_count>200</cell_count>
+					<cell_size>0.2</cell_size>
+					<pose>-75 75 0  0 0 0</pose>
+					<color>1 1 1 0.7</color>
+				</gz-gui>
+			</plugin>
+		</gui>
 		<model name="GridMap">
 			<pose frame="">0 0 0 0 -0 0</pose>
 			<link name="Wall_(37.0,0.0)">
